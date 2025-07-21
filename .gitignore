@@ -54,3 +54,5 @@ dkms.conf
 /epd2in9_V2/
 /dist/
 /captures/
+
+/board

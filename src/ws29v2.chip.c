@@ -65,7 +65,7 @@ void chip_reset(ws29v2_ctx_t *chip) {
     chip->disp_upd_seq = DISP_UPDATE_SEQ_POR;
 
     memset(chip->bw_ram, 0xFF, sizeof(chip->bw_ram));
-    memset(chip->color_ram, 0, sizeof(chip->color_ram));
+    //memset(chip->color_ram, 0, sizeof(chip->color_ram));
 
     chip->spi_state = ST_SPI_WAIT_CMD;
     chip->mode = pin_read(chip->dc);
@@ -102,14 +102,14 @@ static void chip_init_attrs(ws29v2_ctx_t *chip) {
     green_attr = attr_init("green", 255);
     blue_attr = attr_init("blue", 255);
 
-    string_t color_attr = attr_string_init("color");
-    char color_buf[8]; // sufficient for "red/yellow";
-    string_read(color_attr, color_buf, 7);
-    for ( char *p = color_buf; *p; ++p) *p = tolower(*p);
-    chip->color = FB_RED;
-    if (!strcmp("yellow", color_buf)){
-        chip->color = FB_YELLOW;
-    }
+    // string_t color_attr = attr_string_init("color");
+    // char color_buf[8]; // sufficient for "red/yellow";
+    // string_read(color_attr, color_buf, 7);
+    // for ( char *p = color_buf; *p; ++p) *p = tolower(*p);
+    // chip->color = FB_RED;
+    // if (!strcmp("yellow", color_buf)){
+    //     chip->color = FB_YELLOW;
+    // }
 
 
 

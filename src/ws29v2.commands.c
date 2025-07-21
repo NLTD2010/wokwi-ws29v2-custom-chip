@@ -20,7 +20,7 @@ cmd_entry_t cmd_entries[] = {
     CMD_ENTRY(CMD_DISP_UPD_CTL, on_cmd_disp_upd_ctl),
     CMD_ENTRY(CMD_DISP_UPD_CTL2, on_cmd_disp_upd_ctl2),
     CMD_ENTRY(CMD_WRITE_RAM_BW, on_cmd_write_ram_bw),
-    CMD_ENTRY(CMD_WRITE_RAM_COLOR, on_cmd_write_ram_color),
+    //CMD_ENTRY(CMD_WRITE_RAM_COLOR, on_cmd_write_ram_color),
     CMD_ENTRY(CMD_VCOM_SENSE, on_cmd_vcom_sense),
     CMD_ENTRY(CMD_VCOM_SENSE_DUR, on_cmd_vcom_sense_dur),
     CMD_ENTRY(CMD_PROG_VCOM_OTP, on_cmd_prog_vcom_otp),
@@ -86,10 +86,10 @@ actMode_len_t activation_modes[2][4] = {
         {v2_act_seq_scanline, ACT_SEQ_LEN(v2_act_seq_scanline)},
     }};
 
-static uint32_t RED = FB_RED;
+//static uint32_t RED = FB_RED;
 static uint32_t BLACK = FB_BLACK;
 static uint32_t WHITE = FB_WHITE;
-static uint32_t YELLOW = FB_YELLOW;
+//static uint32_t YELLOW = FB_YELLOW;
 
 void cmd_init_hash() {
     cmd_map = calloc(1, sizeof(cmd_map_t));
@@ -238,15 +238,15 @@ static void display_panel_color_scanline(ws29v2_ctx_t *chip, uint8_t invert) {
     int x = 0;
     int index = chip->act_scan_ndx * chip->width;
     for (int i = 0; i < pixels_bytes; i++) {
-        uint8_t pixr = chip->color_ram[row_off + i];
+        //uint8_t pixr = chip->color_ram[row_off + i];
         uint8_t pixbw = chip->bw_ram[row_off + i];
 
-        pixr = invert ? ~pixr : pixr;
+        //pixr = invert ? ~pixr : pixr;
         pixbw = invert ? ~pixbw : pixbw;
 
         for (uint8_t b = 0x80; b; b >>= 1) {
             // if (!chip->act_scan_ndx) GEN_DEBUGF("display_panel_color_scanline:    inv: %2x, pixr: %2x, pixbw: %2x, pixr&b: %2x, pixr&b^i: %2x, pixr? %s, pixbw&b: %2x, pixbw&b^i: %2x, pixbw? %s, \n", invert, pixr, pixbw, pixr & b, (pixr & b) ^ invert, ((pixr & b) ^ invert) ? "T" : "F", pixbw & b, (pixbw & b) ^ invert, ((pixbw & b) ^ invert) ? "T" : "F");
-            uint32_t color = (pixr & b) ? chip->color : ((pixbw & b) ? WHITE : BLACK);
+            uint32_t color = ((pixbw & b) ? WHITE : BLACK);
             buffer_write(chip->frame_buf, (index + x) * sizeof(uint32_t), (uint8_t *)&color, sizeof(uint32_t));
             x++;
         }
@@ -391,15 +391,15 @@ void on_cmd_write_ram_bw(ws29v2_ctx_t *chip) {
     // DBG_BUFFER("on_cmd_write_ram_bw: ram contents ", chip->bw_ram, 4736, 16);
 }
 
-void on_cmd_write_ram_color(ws29v2_ctx_t *chip) {
-    GEN_DEBUGF("on_cmd_write_ram_color: copying %d bytes to ram ... ", chip->data_ndx);
+// void on_cmd_write_ram_color(ws29v2_ctx_t *chip) {
+//     GEN_DEBUGF("on_cmd_write_ram_color: copying %d bytes to ram ... ", chip->data_ndx);
 
-    for (int i = 0; i < chip->data_ndx; i++) {
-        write_ram_byte(chip, chip->color_ram, i);
-    }
+//     for (int i = 0; i < chip->data_ndx; i++) {
+//         write_ram_byte(chip, chip->color_ram, i);
+//     }
 
-    GEN_DEBUGF("x_addr: %d, y_addr: %d\n", chip->x_addr, chip->y_addr);
-}
+//     GEN_DEBUGF("x_addr: %d, y_addr: %d\n", chip->x_addr, chip->y_addr);
+// }
 
 void on_cmd_vcom_sense(ws29v2_ctx_t *chip) {
 }

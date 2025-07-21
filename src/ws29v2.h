@@ -74,7 +74,7 @@ typedef struct {
 
     // display RAM
     uint8_t bw_ram[MAX_DATA_TXFER];
-    uint8_t color_ram[MAX_DATA_TXFER];     // v2 only
+    // uint8_t color_ram[MAX_DATA_TXFER];     // v2 only
 
     // activation
     uint32_t actMode;
@@ -154,8 +154,8 @@ typedef enum {
 // these are represented as ABRG when mapped to uint32_t
 #define FB_BLACK 0x000000FF
 #define FB_WHITE 0xFFFFFFFF
-#define FB_RED 0xFF0000FF
-#define FB_YELLOW 0xFF02A7E6
+// #define FB_RED 0xFF0000FF
+// #define FB_YELLOW 0xFF02A7E6
 
 
 // COMMAND CODES
@@ -170,7 +170,7 @@ typedef enum {
 #define CMD_DISP_UPD_CTL   0x21
 #define CMD_DISP_UPD_CTL2   0x22
 #define CMD_WRITE_RAM_BW   0x24
-#define CMD_WRITE_RAM_COLOR   0x26
+//#define CMD_WRITE_RAM_COLOR   0x26
 #define CMD_VCOM_SENSE   0x28
 #define CMD_VCOM_SENSE_DUR   0x29
 #define CMD_PROG_VCOM_OTP   0x2A
@@ -229,7 +229,7 @@ void on_cmd_master_activation(ws29v2_ctx_t *chip);
 void on_cmd_disp_upd_ctl(ws29v2_ctx_t *chip);
 void on_cmd_disp_upd_ctl2(ws29v2_ctx_t *chip);
 void on_cmd_write_ram_bw(ws29v2_ctx_t *chip);
-void on_cmd_write_ram_color(ws29v2_ctx_t *chip);
+//void on_cmd_write_ram_color(ws29v2_ctx_t *chip);
 void on_cmd_vcom_sense(ws29v2_ctx_t *chip);
 void on_cmd_vcom_sense_dur(ws29v2_ctx_t *chip);
 void on_cmd_prog_vcom_otp(ws29v2_ctx_t *chip);
